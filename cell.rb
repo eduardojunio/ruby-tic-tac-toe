@@ -92,7 +92,7 @@ class Cell
   end
 
   def valid_values_message
-    Cell.valid_values.map { |v| v ? "\"#{v}\"" : v }.join(", ")
+    Cell.valid_values.map { |v| v ? "\"#{v}\"" : v.inspect }.join(", ")
   end
 
   def invalid_value_message(value)

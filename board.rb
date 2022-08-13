@@ -33,24 +33,19 @@ class Board
 
   private
 
-  # TODO: Remove
-  def board
-    cells
-  end
-
   def cells
     @cells
   end
 
   def get_cell(position)
-    cell = board[Cell.key_from_position(position)]
+    cell = cells[Cell.key_from_position(position)]
     raise ArgumentError, "invalid cell position" unless cell
 
     cell
   end
 
   def get_cell_from_coordinates(x, y)
-    cell = board[Cell.key(x, y)]
+    cell = cells[Cell.key(x, y)]
     raise ArgumentError, "invalid cell coordinates" unless cell
 
     cell
