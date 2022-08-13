@@ -91,9 +91,7 @@ class Board
     x = 0
     y = 2
     won = true
-    3.times.each do
-      next if x == cell.x && y == cell.y
-
+    3.times do
       checking_cell = get_cell_from_coordinates(x, y)
       won = false if checking_cell.value != cell.value
       x += 1

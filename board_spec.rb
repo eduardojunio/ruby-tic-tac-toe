@@ -33,6 +33,18 @@ describe Board do
       end
     end
 
+    context "when three random moves happened" do
+      before do
+        board.fill_cell(1, "X")
+        board.fill_cell(3, "O")
+        board.fill_cell(7, "X")
+      end
+
+      it "returns false" do
+        expect(board.winning_cell?(7)).to eq(false)
+      end
+    end
+
     context "when winning in the row" do
       before do
         board.fill_cell(4, "X")
