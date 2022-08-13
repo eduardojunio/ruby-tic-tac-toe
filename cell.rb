@@ -65,6 +65,10 @@ class Cell
     @value = new_value
   end
 
+  def to_s
+    value == Cell.empty_value ? "_" : value
+  end
+
   private
 
   def filled?

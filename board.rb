@@ -22,15 +22,13 @@ class Board
     check_row(cell) || check_column(cell) || diagonal_1_won || diagonal_2_won
   end
 
-  def print
+  def to_s
     result = ""
     for position in 1..9 do
-      cell = get_cell(position)
-      value_to_print = cell.value == Cell.empty_value ? "_" : cell.value
-      result += "#{value_to_print} "
+      result += "#{get_cell(position)} "
       result += "\n" if (position % 3) == 0
     end
-    puts result += "\n"
+    result += "\n"
   end
 
   private
@@ -60,7 +58,7 @@ class Board
 
   def make_cells
     result = {}
-    for position in 1..9 do
+    (1..9).each do |position|
       x = Cell.x_from_position(position)
       y = Cell.y_from_position(position)
       result[Cell.key(x, y)] = Cell.new(x, y, Cell.empty_value)
@@ -70,7 +68,7 @@ class Board
 
   def check_row(cell)
     won = true
-    for x in 0..2 do
+    (0..2).each do |x|
       next if x == cell.x
 
       checking_cell = get_cell_from_coordinates(x, cell.y)
@@ -81,7 +79,7 @@ class Board
 
   def check_column(cell)
     won = true
-    for y in 0..2 do
+    (0..2).each do |y|
       next if y == cell.y
 
       checking_cell = get_cell_from_coordinates(cell.x, y)
@@ -115,7 +113,7 @@ class Board
 
   def check_diagonal_2(cell)
     won = true
-    for i in 2..0 do
+    2.downto(0) do |i|
       next if i == cell.x
 
       checking_cell = get_cell_from_coordinates(i, i)
