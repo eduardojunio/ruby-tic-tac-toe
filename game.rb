@@ -1,19 +1,28 @@
 require("./board.rb")
 
 class Game
+  attr_accessor :board, :current_player, :moves_count
+
   def initialize
     @board = Board.new
     @current_player = "X"
+    @moves_count = 0
   end
 
   def next_move
-    print_intro
-    board.print
-    position = get_position
+    puts "Ruby Tic Tac Toe by Eduardo Macêdo"
+    puts board
+    print "#{current_player}'s turn (1-9): "
+    position = read_number_input
     board.fill_cell(position, current_player)
     won = board.winning_cell?(position)
     if won
-      print_won_message
+      puts "Congratulations! #{current_player} won!!!"
+      return false
+    end
+    self.moves_count += 1
+    if moves_count >= 9
+      puts "It's a draw! Try again!"
       return false
     end
     change_turn
@@ -22,37 +31,15 @@ class Game
 
   private
 
-  def board
-    @board
-  end
-
-  def current_player
-    @current_player
-  end
-
-  def current_player=(new_current_player)
-    @current_player = new_current_player
-  end
-
-  def print_and_flush(text)
-    print text
-    $stdout.flush
-  end
-
   def change_turn
     self.current_player = current_player == "X" ? "O" : "X"
   end
 
-  def get_position
-    print_and_flush "#{current_player}'s turn (1-9): "
-    gets.chomp.to_i
+  def read_input
+    gets.chomp
   end
 
-  def print_intro
-    puts "Ruby Tic Tac Toe by Eduardo Macêdo"
-  end
-
-  def print_won_message
-    puts "Congratulations! #{current_player} won!!!"
+  def read_number_input
+    read_input.to_i
   end
 end
